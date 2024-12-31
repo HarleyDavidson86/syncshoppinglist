@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncshoppinglist/screens/home/shoppingitem_card.dart';
+import 'package:syncshoppinglist/shared/styled_text.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,11 +17,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Einkaufsliste'),
+        title: const StyledTitle("Einkaufsliste"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: const Text('+'),
+        child: const StyledText('+'),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),

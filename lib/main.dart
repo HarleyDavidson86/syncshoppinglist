@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:syncshoppinglist/screens/home/home.dart';
+import 'package:syncshoppinglist/theme.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: Home(),
+  runApp(MaterialApp(
+    theme: primaryTheme,
+    home: const Home(),
   ));
 }
 
