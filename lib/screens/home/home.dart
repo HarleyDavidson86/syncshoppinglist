@@ -11,13 +11,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   ShoppingitemService service = ShoppingitemService();
 
   void addItemToList() {
     setState(() {
-      service.addItem("TestItem ${service.getItemCount()+1}");
-    }); 
+      service.addItem("TestItem ${service.getItemCount() + 1}");
+    });
+  }
+
+  void removeItemFromList(String name) {
+    setState(() {
+      service.deleteItem(name);
+    });
   }
 
   @override
@@ -37,7 +42,8 @@ class _HomeState extends State<Home> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (_, index) {
-                  return ShoppingitemCard(service.getItemAtIndex(index));
+                  return ShoppingitemCard(
+                      service.getItemAtIndex(index), removeItemFromList);
                 },
                 itemCount: service.getItemCount(),
               ),

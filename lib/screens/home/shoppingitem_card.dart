@@ -3,9 +3,10 @@ import 'package:syncshoppinglist/shared/styled_text.dart';
 import 'package:syncshoppinglist/theme.dart';
 
 class ShoppingitemCard extends StatelessWidget {
-  const ShoppingitemCard(this.name, {super.key});
+  const ShoppingitemCard(this.name, this.deleteItem, {super.key});
 
   final String name;
+  final Function(String) deleteItem;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ShoppingitemCard extends StatelessWidget {
             StyledText(name),
             const Expanded(child: SizedBox()),
             IconButton(
-              onPressed: (){}, 
+              onPressed: (){deleteItem(name);}, 
               icon: Icon(Icons.shopping_cart, color: AppColors.textColor),
             ),
           ],
