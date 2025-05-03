@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncshoppinglist/screens/home/shoppingitem_card.dart';
+import 'package:syncshoppinglist/services/item_service.dart';
 import 'package:syncshoppinglist/shared/styled_text.dart';
 
 class Home extends StatefulWidget {
@@ -11,7 +12,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  var items = ['Item 1','Item 2','Item 3'];
+  ShoppingitemService service = ShoppingitemService();
+
+  void addItemToList() {
+    setState(() {
+      service.addItem("TestItem ${service.getItemCount()+1}");
+    }); 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class _HomeState extends State<Home> {
         title: const StyledTitle("Einkaufsliste"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: addItemToList,
         child: const StyledText('+'),
       ),
       body: Container(
@@ -30,9 +37,9 @@ class _HomeState extends State<Home> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (_, index) {
-                  return ShoppingitemCard(items[index]);
+                  return ShoppingitemCard(service.getItemAtIndex(index));
                 },
-                itemCount: items.length,
+                itemCount: service.getItemCount(),
               ),
             ),
           ],
