@@ -23,7 +23,5 @@ class ShoppingitemService {
     _items.remove(name);
   }
 
-  int getItemCount() {
-    return _items.length;
-  }
+  int get itemCount => _items.length; 
 }
