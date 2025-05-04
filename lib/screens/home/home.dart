@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncshoppinglist/screens/home/shoppingitem_card.dart';
 import 'package:syncshoppinglist/services/item_service.dart';
+import 'package:syncshoppinglist/shared/input_dialog.dart';
 import 'package:syncshoppinglist/shared/styled_text.dart';
 
 class Home extends StatefulWidget {
@@ -13,10 +14,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   ShoppingitemService service = ShoppingitemService();
 
-  void addItemToList() {
-    setState(() {
-      service.addItem("TestItem ${service.getItemCount() + 1}");
-    });
+  void addItemToList() async {
+    var result = await InputDialog.show(context: context);
+    if (result != null) {
+      setState(() {
+        service.addItem(result);
+      });
+    }
   }
 
   void removeItemFromList(String name) {
@@ -45,7 +49,7 @@ class _HomeState extends State<Home> {
                   return ShoppingitemCard(
                       service.getItemAtIndex(index), removeItemFromList);
                 },
-                itemCount: service.getItemCount(),
+                itemCount: service.itemCount,
               ),
             ),
           ],
