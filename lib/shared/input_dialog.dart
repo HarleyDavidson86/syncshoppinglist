@@ -18,12 +18,15 @@ class InputDialog extends StatefulWidget {
   /// The dialog title.
   final String title;
 
+  final String initialValue;
+
   ///
   const InputDialog({
     super.key,
     this.cancelText = _defaultCancelText,
     this.okText = _defaultOkText,
     this.title = _defaultTitle,
+    this.initialValue = '',
   });
 
   /// Shows the dialog and returns the input string or `null` on cancel.
@@ -32,6 +35,7 @@ class InputDialog extends StatefulWidget {
     String cancelText = _defaultCancelText,
     String okText = _defaultOkText,
     String title = _defaultTitle,
+    String initialValue = '',
   }) async {
     return showDialog(
       context: context,
@@ -39,6 +43,7 @@ class InputDialog extends StatefulWidget {
         cancelText: cancelText,
         okText: okText,
         title: title,
+        initialValue: initialValue,
       ),
     );
   }
@@ -57,6 +62,12 @@ class InputDialog extends StatefulWidget {
 
 class _InputDialogState extends State<InputDialog> {
   final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.text = widget.initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -29,6 +29,23 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void editItem(String name) {
+    InputDialog.show(
+      context: context,
+      title: "Edit Item",
+      initialValue: name
+    ).then((newName) {
+      if (newName != null && newName.isNotEmpty) {
+        setState(() {
+          service.updateItem(name, newName);
+        });
+      }
+    });
+    setState(() {
+      service.updateItem(name, name);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +64,7 @@ class _HomeState extends State<Home> {
               child: ListView.builder(
                 itemBuilder: (_, index) {
                   return ShoppingitemCard(
-                      service.getItemAtIndex(index), removeItemFromList);
+                      service.getItemAtIndex(index), removeItemFromList, editItem);
                 },
                 itemCount: service.itemCount,
               ),
